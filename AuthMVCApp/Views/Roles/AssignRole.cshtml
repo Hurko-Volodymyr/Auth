@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Tuple<IdentityUser, List<IdentityRole>>
+@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<h2>Assign Role to @Model.Item1.UserName</h2>
+
+<form asp-action="AssignRole" method="post">
+    <input type="hidden" name="userId" value="@Model.Item1.Id" />
+
+    <div class="form-group">
+        <label for="role">Select Role</label>
+        <select id="role" name="roleName" class="form-control">
+            @foreach (var role in Model.Item2)
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Role</button>
+</form>
+
